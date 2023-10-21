@@ -1,14 +1,23 @@
 class Solution {
 public:
     int mySqrt(int x) {
-        for(double guess= 1;guess<=x;guess++){
-            if(guess*guess==x){
-                return (guess);
+        // Using Binary Search
+        int s=0,e=x,ans;
+        while(s<=e){
+            long long int mid=s+(e-s)/2;
+            if(mid*mid==x){
+                ans=mid;
+                break;
             }
-            else if(guess*guess>x){
-                return(guess-1);
+            
+            else if(mid*mid>x)
+            e=mid-1;
+            
+            else{
+            ans=mid;
+            s=mid+1;
             }
         }
-        return 0;
+        return ans;
     }
 };
