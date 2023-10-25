@@ -30,7 +30,7 @@ class Solution
                 pages+=A[i];
                 if(pages>mid){
                     count++;
-                    pages=A[i];
+                     pages=A[i];
                 }
             }
             
