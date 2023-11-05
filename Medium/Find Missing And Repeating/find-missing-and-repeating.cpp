@@ -7,22 +7,47 @@ using namespace std;
 class Solution{
 public:
     vector<int> findTwoElement(vector<int> arr, int n) {
-       int missing=-1,repeating=-1;
-       vector<int>freq(n,0);
-       
-       for(int i=0;i<n;i++){
-           freq[arr[i]-1]++;
-       }
-       
-       for(int i=0;i<n;i++){
-           if(freq[i]==0)
-           missing=i+1;
-           if(freq[i]==2)
-           repeating=i+1;
-       }
-       return{repeating,missing};
+        sort(arr.begin(),arr.end());
+        vector<int> ans;
+        
+        int missing=INT_MAX;
+        int repeating;
+        
+        int count=1;
+        for(int i=0;i<n-1;i++){
+           
+            if(arr[i]==arr[i+1]){
+                repeating=arr[i];
+                break;
+            }
+            
+        }
+        
+        for(int i=0;i<n;i++){
+            
+            if(arr[i]==arr[i+1]){
+                continue;
+            }
+            
+            if(arr[i]!=count){
+                missing=count;
+            }
+            else{
+                count++;
+            }
+        }
+        
+        if(missing==INT_MAX){
+            missing=n;
+        }
+        
+        ans.push_back(repeating);
+        ans.push_back(missing);
+        
+        return ans;
     }
 };
+
 
 //{ Driver Code Starts.
 
