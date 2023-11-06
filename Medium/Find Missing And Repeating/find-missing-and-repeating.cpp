@@ -7,47 +7,33 @@ using namespace std;
 class Solution{
 public:
     vector<int> findTwoElement(vector<int> arr, int n) {
-        sort(arr.begin(),arr.end());
-        vector<int> ans;
+        //Optimal code
+        int missing=-1,repeating=-1;
         
-        int missing=INT_MAX;
-        int repeating;
-        
-        int count=1;
-        for(int i=0;i<n-1;i++){
-           
-            if(arr[i]==arr[i+1]){
-                repeating=arr[i];
-                break;
-            }
-            
-        }
-        
+        //decrease element
         for(int i=0;i<n;i++){
-            
-            if(arr[i]==arr[i+1]){
-                continue;
-            }
-            
-            if(arr[i]!=count){
-                missing=count;
-            }
-            else{
-                count++;
-            }
+            arr[i]--;
         }
         
-        if(missing==INT_MAX){
-            missing=n;
+        //now the elements in the array ranges from 0 to n-1 
+        //and the index of array too ranges from 0 to n-1
+        //so we will store each element occurence in its repective index
+        for(int i=0;i<n;i++){
+            arr[arr[i]%n]+=n;
         }
         
-        ans.push_back(repeating);
-        ans.push_back(missing);
-        
-        return ans;
+        //to check the occurence stored in the array within the original no
+        for(int i=0;i<n;i++){
+            if(arr[i]/n==0){
+               missing=i+1; 
+            }
+            else if(arr[i]/n==2){
+                repeating=i+1;
+            }
+        }
+        return{repeating,missing};
     }
 };
-
 
 //{ Driver Code Starts.
 
